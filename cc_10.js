@@ -56,8 +56,9 @@ console.log(prod1.getDetails()); // Updated product details after order
 console.log("Task 3: Creating an Inventory Class")
 
 class Inventory {   //declared the inventory class
-    constructor (products) {    //initialized using the products array
+    constructor (products, orders) {    //initialized using the products array
         this.products = []      //saying that this.products is the array
+        this.orders = []
     }
 
     addProduct(product) {       //added method to add a product to the inventory class
@@ -70,8 +71,35 @@ class Inventory {   //declared the inventory class
             console.log(product.getDetails());
         });
     }
+
+    //Task 4
+    placeOrder(orderId, product, quantity) { //created new method using orderId, product, and quantity
+        if (product.stock >= quantity) {    //saying that if we have the product in stock then 
+            const order = new Order(orderId, product, quantity);    //to create an order object
+            this.orders.push(order);    //push the object into the orders array
+            console.log(`Order placed successfully: $${order.getOrderDetails()}`);  
+        } else {    //if we don't have it in stock, print that we do not have enough stock
+            console.log(`Error: Not enough stock for ${product.name}. Available stock: ${product.stock}`);
+        }
+    }
+
+    listOrders(){   //created method listOrders
+        console.log("Placed Orders:")
+        this.orders.forEach(order => {  //goes through the array and console.logs the order details.
+            console.log(order.getOrderDetails());
+        });
+    }
 }
 
 const inventory = new Inventory();  //makes the empty array that we then add products to
 inventory.addProduct(prod1);        //adding prod1 to the array
 inventory.listProducts();           //listing products in the array
+
+
+//Task 4: Implementing Order Management
+console.log("Task 4: Implementing Order Management")
+
+inventory.placeOrder(601, prod1, 2);    //placing an order
+inventory.listOrders(); //listing orders in the array
+console.log("Updated product information:")
+console.log(prod1.getDetails());    //console.logging the updated product details.
