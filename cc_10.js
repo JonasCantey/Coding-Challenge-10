@@ -50,3 +50,28 @@ const order1 = new Order(501, prod1, 2); // Create an order for 2 laptops
 console.log(order1.getOrderDetails()); // Order details
 
 console.log(prod1.getDetails()); // Updated product details after order
+
+
+//Task 3: Creating an Inventory Class
+console.log("Task 3: Creating an Inventory Class")
+
+class Inventory {   //declared the inventory class
+    constructor (products) {    //initialized using the products array
+        this.products = []      //saying that this.products is the array
+    }
+
+    addProduct(product) {       //added method to add a product to the inventory class
+        this.products.push(product);
+    }
+
+    listProducts() {            //added method to list the products within the inventory class
+        console.log("Current Inventory:")
+        this.products.forEach(product => {  //saying for each product in the inventory, getDetails
+            console.log(product.getDetails());
+        });
+    }
+}
+
+const inventory = new Inventory();  //makes the empty array that we then add products to
+inventory.addProduct(prod1);        //adding prod1 to the array
+inventory.listProducts();           //listing products in the array
