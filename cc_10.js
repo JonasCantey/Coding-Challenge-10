@@ -89,6 +89,15 @@ class Inventory {   //declared the inventory class
             console.log(order.getOrderDetails());
         });
     }
+
+    restockProduct(productId, quantity) {   //new method restock product using productId and quantity
+        const product = this.products.find(prod => prod.id === productId);  //finding product using the Id
+
+        if (product) {  //if the product is found, update the quantity  
+            product.updateStock(-quantity);
+            console.log(`Restocked ${product.name}. New Stock: ${product.stock}`);  //console logged the product name and new stock
+        }
+    }
 }
 
 const inventory = new Inventory();  //makes the empty array that we then add products to
@@ -103,3 +112,9 @@ inventory.placeOrder(601, prod1, 2);    //placing an order
 inventory.listOrders(); //listing orders in the array
 console.log("Updated product information:")
 console.log(prod1.getDetails());    //console.logging the updated product details.
+
+//Task 5: Implementing Product Restocking
+console.log("Task 5: Implementing Product Restocking")
+
+inventory.restockProduct(101, 5); //restocked the product
+console.log(prod1.getDetails());    //getDetails on product
